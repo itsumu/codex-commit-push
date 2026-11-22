@@ -1,12 +1,12 @@
 # codex-commit-push
 
-**简体中文** | [English](README.en.md)
+**English** | [简体中文](README.zh-CN.md)
 
-让 Codex 根据真实 Git diff 撰写提交说明、创建提交，再把当前分支推送到指定远端。它在本机调用 Codex CLI 和 Git，不托管代码，也不需要额外的 GitHub Token。
+Use Codex to write a commit message from your Git diff, commit the reviewed changes, and push the current branch. The tool runs the Codex CLI and Git on your machine. It does not host your repository or require a separate GitHub token.
 
-## 安装
+## Installation
 
-需要 Git、Python 3 和已登录的 Codex CLI；推送沿用本机 Git 的认证。以下命令适用于 macOS 和 Linux：
+On macOS or Linux, you need Git, Python 3, and a signed-in Codex CLI. Pushes use your existing Git credentials.
 
 ```sh
 git clone https://github.com/itsumu/codex-commit-push.git
@@ -14,34 +14,34 @@ cd codex-commit-push
 sh install.sh
 ```
 
-安装器将 skill 复制到 `${CODEX_HOME:-$HOME/.codex}/skills/commit-push`，并添加用户级 Git 别名。不覆盖同名但内容不同的 skill 或别名。
+The installer copies the skill to `${CODEX_HOME:-$HOME/.codex}/skills/commit-push` and adds a global Git alias. It will not overwrite a skill or alias with the same name but different contents.
 
-## 使用
+## Usage
 
-在要提交的仓库内运行：
+From the repository you want to commit to, run:
 
 ```sh
 git codex-push
 ```
 
-也可以在 Codex 对话中输入 `$commit-push`。这会请求**提交并推送**，不仅是预览提交说明。若已暂存文件，默认只提交暂存内容；否则由 Codex 审阅工作区，选取相关改动。没有改动时不创建空提交。多个仓库并列时，可以用 `git -C <仓库路径> codex-push` 明确指定目标。
+You can also enter `$commit-push` in a Codex chat. Both ask Codex to **commit and push**, not just preview a message. If you have staged changes, only those changes are included by default. Otherwise, Codex reviews the working tree and selects relevant changes. It does not create empty commits. To target a specific repository, use `git -C <path-to-repo> codex-push`.
 
-Codex 会展示拟用的提交说明、范围、目标远端和分支。发布脚本核对 HEAD、分支和已审阅的暂存树，保留 Git hooks 与签名设置，不使用强推。推送被拒绝时，本地提交仍保留。模型对差异或敏感信息的判断不是保证，请留意提交范围。
+Codex shows the proposed message, the changes to include, and the destination remote and branch. Before committing, the helper checks that HEAD, the branch, and the reviewed staging area still match. It respects Git hooks and signing settings and never force-pushes. If the push is rejected, the commit stays local. Always check what will be included: Codex can miss sensitive data or misinterpret a change.
 
-## 验证
+## Tests
 
-在本工具的仓库目录中运行测试。测试只向临时本地裸仓库推送：
+Run the tests from this tool's repository. They push only to a temporary local bare repository:
 
 ```sh
 python3 -m unittest discover -s tests
 ```
 
-## 卸载
+## Uninstall
 
-在本工具的仓库目录中运行：
+From this tool's repository, run:
 
 ```sh
 sh install.sh --uninstall
 ```
 
-卸载仅移除与当前发行内容一致的 skill 文件和别名，不会删除仓库或撤销提交。
+The uninstaller removes only the skill files and alias that match this version. It does not delete repositories or undo commits.
