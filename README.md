@@ -45,3 +45,7 @@ sh install.sh --uninstall
 ```
 
 The uninstaller removes only the skill files and alias that match this version. It does not delete repositories or undo commits.
+
+## License
+
+[MIT License](LICENSE)

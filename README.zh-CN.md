@@ -45,3 +45,7 @@ sh install.sh --uninstall
 ```
 
 卸载仅移除与当前发行内容一致的 skill 文件和别名，不会删除仓库或撤销提交。
+
+## 许可证
+
+[MIT 开源许可证](LICENSE)
